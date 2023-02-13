@@ -1,5 +1,6 @@
 package com.ape.meditationretreattimer
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -23,6 +24,9 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onStartClick(timer: Timer) {
         Toast.makeText(this, "Start ${timer.name}", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, PlayTimerActivity::class.java)
+        intent.putExtra("timerId", timer.id)
+        startActivity(intent)
     }
 
     override fun onEditClick(timer: Timer) {
