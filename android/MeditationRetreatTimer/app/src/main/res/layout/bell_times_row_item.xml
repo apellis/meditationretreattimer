@@ -19,7 +19,7 @@
 
     <Space
         android:id="@+id/space"
-        android:layout_width="20dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/bell_time" />

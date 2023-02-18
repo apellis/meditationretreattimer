@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
@@ -18,9 +17,9 @@ class TimerListItemAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.timer_name)
-        val startButton: View = view.findViewById(R.id.start_button)
-        val editButton: View = view.findViewById(R.id.edit_button)
-        val deleteButton: View = view.findViewById(R.id.delete_button)
+        private val startButton: View = view.findViewById(R.id.start_button)
+        private val editButton: View = view.findViewById(R.id.edit_button)
+        private val deleteButton: View = view.findViewById(R.id.delete_button)
 
         fun bind(timer: Timer, clickListener: OnItemClickListener) {
             startButton.setOnClickListener {

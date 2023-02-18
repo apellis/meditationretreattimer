@@ -30,16 +30,17 @@ class TimersRepository {
     }
 
     init {
-        timers[0].bellTimes.add(0, BellTime("Breakfast", LocalTime.parse("08:00:00")))
-        timers[0].bellTimes.add(1, BellTime("Sit", LocalTime.parse("08:30:00")))
-        timers[0].bellTimes.add(2, BellTime("Walk", LocalTime.parse("09:30:00")))
-        timers[0].bellTimes.add(3, BellTime("Sit", LocalTime.parse("10:00:00")))
-        timers[0].bellTimes.add(4, BellTime("Lunch", LocalTime.parse("11:15:00")))
-        timers[0].bellTimes.add(5, BellTime("Lunch", LocalTime.parse("12:00:00")))
-        timers[0].bellTimes.add(6, BellTime("Sit", LocalTime.parse("13:45:00")))
-        timers[0].bellTimes.add(7, BellTime("Walk", LocalTime.parse("15:00:00")))
-        timers[0].bellTimes.add(8, BellTime("Sit", LocalTime.parse("15:30:00")))
-        timers[0].bellTimes.add(9, BellTime("Closing", LocalTime.parse("17:00:00")))
+        timers[0].bellTimes = mutableListOf(
+            BellTime("Breakfast", LocalTime.parse("08:00:00")),
+            BellTime("Sit", LocalTime.parse("08:30:00")),
+            BellTime("Walk", LocalTime.parse("09:30:00")),
+            BellTime("Sit", LocalTime.parse("10:00:00")),
+            BellTime("Lunch", LocalTime.parse("11:15:00")),
+            BellTime("Lunch", LocalTime.parse("12:00:00")),
+            BellTime("Sit", LocalTime.parse("13:45:00")),
+            BellTime("Walk", LocalTime.parse("15:00:00")),
+            BellTime("Sit", LocalTime.parse("15:30:00")),
+            BellTime("Closing", LocalTime.parse("17:00:00")))
     }
 
     fun getAllTimers(): Array<Timer> {
