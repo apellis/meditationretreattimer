@@ -23,17 +23,19 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onStartClick(timer: Timer) {
-        Toast.makeText(this, "Start ${timer.name}", Toast.LENGTH_LONG).show()
         val intent = Intent(this, PlayTimerActivity::class.java)
         intent.putExtra("timerId", timer.id)
         startActivity(intent)
     }
 
     override fun onEditClick(timer: Timer) {
-        Toast.makeText(this, "Edit ${timer.name}", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, EditTimerActivity::class.java)
+        intent.putExtra("timerId", timer.id)
+        startActivity(intent)
     }
 
     override fun onDeleteClick(timer: Timer) {
         Toast.makeText(this, "Delete ${timer.name}", Toast.LENGTH_LONG).show()
+        TODO()
     }
 }

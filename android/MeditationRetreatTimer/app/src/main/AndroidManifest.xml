@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MeditationRetreatTimer"
         tools:targetApi="31">
         <activity
+            android:name=".EditTimerActivity"
+            android:exported="false" />
+        <activity
             android:name=".PlayTimerActivity"
             android:exported="false" />
         <activity
