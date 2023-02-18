@@ -5,6 +5,21 @@ import com.ape.meditationretreattimer.model.Timer
 import java.time.LocalTime
 
 class TimersRepository {
+    /**
+     * The current data model is simple: a Timer has a list of bell times that are stored in
+     * ascending order by local time, and each bell time has a name. The segment between
+     * consecutive bell times is labeled in the UI by the name of its starting bell time. The
+     * last bell time's name is ignored.
+     *
+     * Conceptually, a "Timer" is for a full session, and a session is a subset of a calendar
+     * day. A session may be something like alternating sitting and walking segments with a meal
+     * break or two and a closing bell.
+     *
+     * In the future, it would be nice to decouple segments, bells, names, and sounds. For
+     * example, perhaps a 2hr sit block has a lower-volume halfway bell. This should not change
+     * the fact that there is conceptually one 2hr segment rather than two 1hr segments.
+     */
+
     companion object {
         private val timers: Array<Timer> = arrayOf(
             Timer(1, "Foo"),
