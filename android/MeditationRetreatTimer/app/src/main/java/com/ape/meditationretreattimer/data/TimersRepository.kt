@@ -34,12 +34,14 @@ class TimersRepository {
             BellTime("Breakfast", LocalTime.parse("08:00:00")),
             BellTime("Sit", LocalTime.parse("08:30:00")),
             BellTime("Walk", LocalTime.parse("09:30:00")),
-            BellTime("Sit", LocalTime.parse("10:00:00")),
+            BellTime("Group Sit", LocalTime.parse("10:00:00")),
             BellTime("Lunch", LocalTime.parse("11:15:00")),
-            BellTime("Lunch", LocalTime.parse("12:00:00")),
-            BellTime("Sit", LocalTime.parse("13:45:00")),
-            BellTime("Walk", LocalTime.parse("15:00:00")),
-            BellTime("Sit", LocalTime.parse("15:30:00")),
+            BellTime("Walk", LocalTime.parse("12:00:00")),
+            BellTime("Sit", LocalTime.parse("12:30:00")),
+            BellTime("Walk", LocalTime.parse("13:30:00")),
+            BellTime("Sit", LocalTime.parse("14:00:00")),
+            BellTime("Walk", LocalTime.parse("15:30:00")),
+            BellTime("Sit", LocalTime.parse("16:00:00")),
             BellTime("Closing", LocalTime.parse("17:00:00")))
     }
 
