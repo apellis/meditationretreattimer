@@ -11,7 +11,7 @@ import com.ape.meditationretreattimer.model.Timer
 
 class TimerListItemAdapter(
     private val context: Context,
-    private val timers: Array<Timer>,
+    private val timers: List<Timer>,
     private val itemClickListener: OnItemClickListener)
     : RecyclerView.Adapter<TimerListItemAdapter.ViewHolder>() {
 

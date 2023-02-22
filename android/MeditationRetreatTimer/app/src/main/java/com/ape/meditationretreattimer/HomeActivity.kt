@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.ape.meditationretreattimer.data.TimersRepository
+import androidx.room.Room
+import com.ape.meditationretreattimer.data.AppDatabase
+import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityHomeBinding
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.ui.adapter.OnItemClickListener
@@ -18,8 +20,10 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val timersRepository = TimersRepository()
-        binding.timersList.adapter = TimerListItemAdapter(this, timersRepository.getAllTimers(), this)
+        val db = AppDatabase.getDatabase(applicationContext)
+        val timerDao = db.timerDao()
+
+        binding.timersList.adapter = TimerListItemAdapter(this, timerDao.getAll(), this)
     }
 
     override fun onStartClick(timer: Timer) {
