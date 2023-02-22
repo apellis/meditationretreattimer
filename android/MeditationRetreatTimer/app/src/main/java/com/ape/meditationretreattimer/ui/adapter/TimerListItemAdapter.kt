@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
 import com.ape.meditationretreattimer.model.Timer
@@ -12,8 +14,8 @@ import com.ape.meditationretreattimer.model.Timer
 class TimerListItemAdapter(
     private val context: Context,
     private val timers: List<Timer>,
-    private val itemClickListener: OnItemClickListener)
-    : RecyclerView.Adapter<TimerListItemAdapter.ViewHolder>() {
+    private val itemClickListener: OnItemClickListener
+) : ListAdapter<Timer, TimerListItemAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.timer_name)
@@ -33,6 +35,16 @@ class TimerListItemAdapter(
             deleteButton.setOnClickListener {
                 clickListener.onDeleteClick(timer)
             }
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Timer>() {
+        override fun areItemsTheSame(oldItem: Timer, newItem: Timer): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Timer, newItem: Timer): Boolean {
+            return oldItem == newItem
         }
     }
 

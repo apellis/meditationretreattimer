@@ -1,10 +1,10 @@
 package com.ape.meditationretreattimer
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.room.Room
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityHomeBinding
@@ -16,6 +16,7 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
+    private lateinit var timers: MutableList<Timer>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +25,17 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
 
         db = AppDatabase.getDatabase(applicationContext)
         timerDao = db.timerDao()
+        timers = timerDao.getAll().toMutableList()
+
+        binding.timersList.layoutManager = LinearLayoutManager(this)
+        binding.timersList.adapter = TimerListItemAdapter(this, timers, this)
 
         binding.addTimer.setOnClickListener {
             // TODO: set id to a fresh id
             // TODO: popup dialog to set a name
             timerDao.insert(Timer("foo", ""))
+            refreshTimers()
         }
-
-        binding.timersList.adapter = TimerListItemAdapter(this, timerDao.getAll(), this)
     }
 
     override fun onStartClick(timer: Timer) {
@@ -48,5 +52,13 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onDeleteClick(timer: Timer) {
         timerDao.delete(timer)
+        refreshTimers()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun refreshTimers() {
+        timers.clear()
+        timers.addAll(timerDao.getAll())
+        binding.timersList.adapter!!.notifyDataSetChanged()
     }
 }
