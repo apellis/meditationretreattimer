@@ -12,18 +12,9 @@ data class Segment(val name: String, val startTime: LocalTime, val endTime: Loca
 
 @Entity
 data class Timer(
-    @PrimaryKey val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "bell_times_json") val bellTimesJson: String) {
 
-    var bellTimes: MutableList<BellTime> = mutableListOf()
-
-    val segments: Array<Segment>
-        get() {
-            return buildList {
-                for ((start, end) in bellTimes.zipWithNext()) {
-                    add(Segment(start.name, start.time, end.time))
-                }
-            }.toTypedArray()
-        }
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 }

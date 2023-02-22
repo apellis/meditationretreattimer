@@ -14,14 +14,22 @@ import com.ape.meditationretreattimer.ui.adapter.TimerListItemAdapter
 
 class HomeActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var db: AppDatabase
+    private lateinit var timerDao: TimerDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val db = AppDatabase.getDatabase(applicationContext)
-        val timerDao = db.timerDao()
+        db = AppDatabase.getDatabase(applicationContext)
+        timerDao = db.timerDao()
+
+        binding.addTimer.setOnClickListener {
+            // TODO: set id to a fresh id
+            // TODO: popup dialog to set a name
+            timerDao.insert(Timer("foo", ""))
+        }
 
         binding.timersList.adapter = TimerListItemAdapter(this, timerDao.getAll(), this)
     }
@@ -39,7 +47,6 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onDeleteClick(timer: Timer) {
-        Toast.makeText(this, "Delete ${timer.name}", Toast.LENGTH_LONG).show()
-        TODO()
+        timerDao.delete(timer)
     }
 }

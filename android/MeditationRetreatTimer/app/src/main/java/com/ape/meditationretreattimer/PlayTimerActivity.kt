@@ -23,6 +23,6 @@ class PlayTimerActivity : AppCompatActivity() {
         timer = timerDao.getById(intent.extras!!.getInt("timerId")!!)[0]
         binding.timerName.text = timer.name
 
-        binding.segmentsList.adapter = BellTimeListItemAdapter(this, timer.segments)
+        //binding.segmentsList.adapter = BellTimeListItemAdapter(this, timer.segments)
     }
 }

@@ -1,9 +1,6 @@
 package com.ape.meditationretreattimer.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.ape.meditationretreattimer.model.Timer
 
 @Dao
@@ -19,4 +16,7 @@ public interface TimerDao {
 
     @Update
     fun update(timer: Timer)
+
+    @Delete
+    fun delete(timer: Timer)
 }
