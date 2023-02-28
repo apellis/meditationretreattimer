@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,7 +15,7 @@ import com.ape.meditationretreattimer.model.Timer
 class TimerListItemAdapter(
     private val context: Context,
     private val timers: List<Timer>,
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnTimerListItemClickListener
 ) : ListAdapter<Timer, TimerListItemAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,7 +24,7 @@ class TimerListItemAdapter(
         private val editButton: View = view.findViewById(R.id.edit_button)
         private val deleteButton: View = view.findViewById(R.id.delete_button)
 
-        fun bind(timer: Timer, clickListener: OnItemClickListener) {
+        fun bind(timer: Timer, clickListener: OnTimerListItemClickListener) {
             startButton.setOnClickListener {
                 clickListener.onStartClick(timer)
             }
@@ -63,7 +64,7 @@ class TimerListItemAdapter(
     override fun getItemCount() = timers.size
 }
 
-interface OnItemClickListener {
+interface OnTimerListItemClickListener {
     fun onStartClick(timer: Timer)
     fun onEditClick(timer: Timer)
     fun onDeleteClick(timer: Timer)

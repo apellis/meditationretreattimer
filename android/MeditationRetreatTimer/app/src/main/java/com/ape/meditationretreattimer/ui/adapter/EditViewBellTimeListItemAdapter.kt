@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
 import com.ape.meditationretreattimer.model.Segment
+import com.ape.meditationretreattimer.model.Timer
 
 class EditViewBellTimeListItemAdapter(
     private val context: Context,
@@ -34,4 +35,9 @@ class EditViewBellTimeListItemAdapter(
     }
 
     override fun getItemCount() = segments.size
+}
+
+interface OnEditBellTimeItemClickListener {
+    fun onEditClick(timer: Timer)
+    fun onDeleteClick(timer: Timer)
 }

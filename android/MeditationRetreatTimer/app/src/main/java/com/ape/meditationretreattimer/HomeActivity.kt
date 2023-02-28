@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityHomeBinding
+import com.ape.meditationretreattimer.model.BellTime
 import com.ape.meditationretreattimer.model.Timer
-import com.ape.meditationretreattimer.ui.adapter.OnItemClickListener
+import com.ape.meditationretreattimer.model.TimerData
+import com.ape.meditationretreattimer.ui.adapter.OnTimerListItemClickListener
 import com.ape.meditationretreattimer.ui.adapter.TimerListItemAdapter
 
-class HomeActivity : AppCompatActivity(), OnItemClickListener {
+class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
@@ -38,7 +40,7 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
                 .setTitle("New timer")
                 .setMessage("Give the new timer a name")
                 .setPositiveButton("OK") { _, _ ->
-                    timerDao.insert(Timer(input.text.toString(), ""))
+                    timerDao.insert(Timer(input.text.toString(), TimerData(listOf())))
                     refreshTimers()
                 }
                 .setCancelable(true)
