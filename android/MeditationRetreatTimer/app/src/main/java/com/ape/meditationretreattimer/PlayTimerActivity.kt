@@ -24,5 +24,8 @@ class PlayTimerActivity : AppCompatActivity() {
         binding.timerName.text = timer.name
 
         //binding.segmentsList.adapter = BellTimeListItemAdapter(this, timer.segments)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

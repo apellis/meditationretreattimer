@@ -45,6 +45,8 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
                 .setView(input)
                 .show()
         }
+
+        setSupportActionBar(binding.toolbar)
     }
 
     override fun onStartClick(timer: Timer) {
