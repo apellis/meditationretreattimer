@@ -23,6 +23,7 @@ class PlayTimerActivity : AppCompatActivity() {
     private lateinit var segments: MutableList<Segment>
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
+    private lateinit var handler : Handler
 
     private val mediaPlayer = MediaPlayer().apply {
         setOnPreparedListener { start() }
@@ -49,7 +50,7 @@ class PlayTimerActivity : AppCompatActivity() {
         // Prevent device lock screen from coming on
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        val handler = Handler(Looper.getMainLooper())
+        handler = Handler(Looper.getMainLooper())
         handler.post(object: Runnable {
             @SuppressLint("SetTextI18n")
             override fun run() {
@@ -91,5 +92,12 @@ class PlayTimerActivity : AppCompatActivity() {
             prepareAsync()
         }
         assetFileDescriptor.close()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // Remove any pending callbacks that might have old data and play while not in focus
+        handler.removeCallbacksAndMessages(null)
     }
 }
