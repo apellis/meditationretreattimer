@@ -43,18 +43,25 @@ class PlayTimerActivity : AppCompatActivity() {
         handler.post(object: Runnable {
             @SuppressLint("SetTextI18n")
             override fun run() {
-                val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
                 val newPos: Int
                 val segmentStr: String
-                if (LocalTime.now() >= segments[segments.size - 1].endTime) {
+                val now = LocalTime.now()
+
+                if (now >= segments[segments.size - 1].endTime) {
                     // Session is complete
                     newPos = RecyclerView.NO_POSITION
-                    segmentStr=  "All done!"
+                    segmentStr = "All done!"
+                } else if (now < segments[segments.size - 1].endTime) {
+                    // Session hasn't started yet
+                    newPos = RecyclerView.NO_POSITION
+                    segmentStr = "Waiting to start..."
                 } else {
                     newPos = segments.indexOfLast { LocalTime.now() >= it.startTime }
-                    segmentStr = segments[newPos].name
+                    segmentStr = "Now: ${segments[newPos].name}"
                 }
-                binding.segmentNow.text = "$timeStr\nNow: $segmentStr"
+
+                val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+                binding.segmentNow.text = "$timeStr\n$segmentStr"
                 (binding.segmentsList.adapter as BellTimeListItemAdapter).setSelectedPos(newPos)
                 handler.postDelayed(this, Utils.TIME_RESOLUTION_MILLIS)
             }
