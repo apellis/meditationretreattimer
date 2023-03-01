@@ -5,13 +5,11 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityHomeBinding
-import com.ape.meditationretreattimer.model.BellTime
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.model.TimerData
 import com.ape.meditationretreattimer.ui.adapter.OnTimerListItemClickListener
@@ -50,7 +48,6 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
         }
 
         setSupportActionBar(binding.toolbar)
-        Log.d("FOO", "!!! onCreate ")
     }
 
     override fun onStartClick(timer: Timer) {

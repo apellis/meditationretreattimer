@@ -8,5 +8,7 @@ class Utils {
         fun formatLocalTime(lt: LocalTime): String {
             return lt.format(DateTimeFormatter.ofPattern("HH:mm"))
         }
+
+        const val TIME_RESOLUTION_MILLIS: Long = 100
     }
 }

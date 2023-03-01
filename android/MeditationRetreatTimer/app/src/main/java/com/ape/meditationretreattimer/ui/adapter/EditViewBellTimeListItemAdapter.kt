@@ -9,12 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
 import com.ape.meditationretreattimer.Utils
+import com.ape.meditationretreattimer.model.BellTime
 import com.ape.meditationretreattimer.model.Segment
 import com.ape.meditationretreattimer.model.Timer
 
 class EditViewBellTimeListItemAdapter(
     private val context: Context,
-    private val segments: List<Segment>,
+    private val bellTimes: List<BellTime>,
     private val itemClickListener: OnEditBellTimeItemClickListener)
     : RecyclerView.Adapter<EditViewBellTimeListItemAdapter.ViewHolder>() {
 
@@ -24,13 +25,13 @@ class EditViewBellTimeListItemAdapter(
         private val editButton: View = view.findViewById(R.id.edit_button)
         private val deleteButton: View = view.findViewById(R.id.delete_button)
 
-        fun bind(segment: Segment, clickListener: OnEditBellTimeItemClickListener) {
+        fun bind(bellTime: BellTime, clickListener: OnEditBellTimeItemClickListener) {
             editButton.setOnClickListener {
-                clickListener.onEditClick(segment)
+                clickListener.onEditClick(bellTime)
             }
 
             deleteButton.setOnClickListener {
-                clickListener.onDeleteClick(segment)
+                clickListener.onDeleteClick(bellTime)
             }
         }
     }
@@ -44,17 +45,16 @@ class EditViewBellTimeListItemAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val segment = segments[position]
-        viewHolder.timeTextView.text =
-            "${Utils.formatLocalTime(segment.startTime)}–${Utils.formatLocalTime(segment.endTime)}"
-        viewHolder.nameTextView.text = segment.name
-        viewHolder.bind(segments[position], itemClickListener)
+        val bellTime = bellTimes[position]
+        viewHolder.timeTextView.text = "${Utils.formatLocalTime(bellTime.time)}"
+        viewHolder.nameTextView.text = bellTime.name
+        viewHolder.bind(bellTimes[position], itemClickListener)
     }
 
-    override fun getItemCount() = segments.size
+    override fun getItemCount() = bellTimes.size
 }
 
 interface OnEditBellTimeItemClickListener {
-    fun onEditClick(segment: Segment)
-    fun onDeleteClick(segment: Segment)
+    fun onEditClick(bellTime: BellTime)
+    fun onDeleteClick(bellTime: BellTime)
 }

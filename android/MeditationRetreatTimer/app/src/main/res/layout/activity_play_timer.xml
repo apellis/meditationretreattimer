@@ -39,7 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:textSize="36sp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/space"
         tools:text="Now: Segment name\n(00:04:20 remaining)" />
 

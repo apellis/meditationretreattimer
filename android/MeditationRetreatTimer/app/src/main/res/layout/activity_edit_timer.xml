@@ -28,7 +28,7 @@
         tools:text="Name of timer" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/segments_list"
+        android:id="@+id/bell_times_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
@@ -41,7 +41,7 @@
         android:padding="4dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_timer"
+        android:id="@+id/add_bell_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
