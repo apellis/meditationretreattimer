@@ -75,7 +75,6 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
             builder.show()
         }
 
-
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
