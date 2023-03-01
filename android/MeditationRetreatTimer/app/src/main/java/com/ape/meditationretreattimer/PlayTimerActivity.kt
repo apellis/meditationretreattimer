@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityPlayTimerBinding
@@ -43,6 +44,7 @@ class PlayTimerActivity : AppCompatActivity() {
         binding.timerName.text = timer.name
 
         binding.segmentsList.adapter = BellTimeListItemAdapter(this, segments)
+        (binding.segmentsList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

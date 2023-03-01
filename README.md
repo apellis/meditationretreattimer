@@ -9,7 +9,6 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
       * Current build basically works but is rough around the edges
    * TODO
       * Bugfixes
-         * Current segment name flickers (boldface?) in play timer UI
          * (Can't consistently repro) Sometimes there is a spurious bell immediately upon starting to play a timer _in medias res_
       * Error handling
          * Many null checks
