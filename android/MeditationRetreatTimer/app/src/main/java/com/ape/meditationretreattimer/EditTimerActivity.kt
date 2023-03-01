@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
+import android.text.method.TimeKeyListener
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.ape.meditationretreattimer.data.AppDatabase
@@ -14,6 +16,7 @@ import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.ui.adapter.EditViewBellTimeListItemAdapter
 import com.ape.meditationretreattimer.ui.adapter.OnEditBellTimeItemClickListener
 import java.time.LocalTime
+import java.util.*
 
 // TODO: re-order functionality, ideally with tag-and-drag
 class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
@@ -45,6 +48,8 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
             inputs.addView(inputName)
             val inputTime = EditText(this)
             inputTime.hint = "Bell time (HH:mm)"
+            inputTime.inputType = InputType.TYPE_DATETIME_VARIATION_TIME
+            inputTime.keyListener = TimeKeyListener(Locale.US)
             inputs.addView(inputTime)
             val builder = AlertDialog.Builder(this)
                 .setTitle("New bell")

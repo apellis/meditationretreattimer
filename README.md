@@ -15,6 +15,7 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Input validation for bell times
       * Code quality
          * Move DB queries off main thread and remove `.allowMainThreadQueries()` from the database builder in `data.AppDatabase`
+         * Add tests
       * Features
          * Some sort of good UI for editing bell times without having to delete and re-add them
          * Unnamed bells that don't break up a segment (don't change the displayed "Now" segment upon ringing)
