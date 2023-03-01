@@ -6,14 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.Toast
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityEditTimerBinding
 import com.ape.meditationretreattimer.model.BellTime
-import com.ape.meditationretreattimer.model.Segment
 import com.ape.meditationretreattimer.model.Timer
-import com.ape.meditationretreattimer.model.TimerData
 import com.ape.meditationretreattimer.ui.adapter.EditViewBellTimeListItemAdapter
 import com.ape.meditationretreattimer.ui.adapter.OnEditBellTimeItemClickListener
 import java.time.LocalTime

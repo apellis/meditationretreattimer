@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
 import com.ape.meditationretreattimer.Utils
 import com.ape.meditationretreattimer.model.BellTime
-import com.ape.meditationretreattimer.model.Segment
-import com.ape.meditationretreattimer.model.Timer
 
 class EditViewBellTimeListItemAdapter(
     private val context: Context,
