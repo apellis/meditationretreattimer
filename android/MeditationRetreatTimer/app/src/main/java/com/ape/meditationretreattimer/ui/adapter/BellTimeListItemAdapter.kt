@@ -37,10 +37,10 @@ class BellTimeListItemAdapter(
         viewHolder.timeTextView.text =
             "${Utils.formatLocalTime(segment.startTime)}–${Utils.formatLocalTime(segment.endTime)}"
         viewHolder.nameTextView.text = segment.name
-        if (position == selectedPos) {
-            viewHolder.timeTextView.setTypeface(null, Typeface.BOLD)
-            viewHolder.nameTextView.setTypeface(null, Typeface.BOLD)
-        }
+        viewHolder.timeTextView.setTypeface(
+            null, if (position == selectedPos) Typeface.BOLD else Typeface.NORMAL)
+        viewHolder.nameTextView.setTypeface(
+            null, if (position == selectedPos) Typeface.BOLD else Typeface.NORMAL)
     }
 
     override fun getItemCount() = segments.size

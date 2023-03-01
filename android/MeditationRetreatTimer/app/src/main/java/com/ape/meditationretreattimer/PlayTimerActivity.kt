@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
@@ -47,11 +48,11 @@ class PlayTimerActivity : AppCompatActivity() {
                 val segmentStr: String
                 val now = LocalTime.now()
 
-                if (now >= segments[segments.size - 1].endTime) {
+                if (segments.isEmpty() || now >= segments[segments.size - 1].endTime) {
                     // Session is complete
                     newPos = RecyclerView.NO_POSITION
                     segmentStr = "All done!"
-                } else if (now < segments[segments.size - 1].endTime) {
+                } else if (now < segments[0].startTime) {
                     // Session hasn't started yet
                     newPos = RecyclerView.NO_POSITION
                     segmentStr = "Waiting to start..."

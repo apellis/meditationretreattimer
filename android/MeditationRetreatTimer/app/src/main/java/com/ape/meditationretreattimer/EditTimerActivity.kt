@@ -51,7 +51,7 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
             inputs.addView(inputTime)
             val builder = AlertDialog.Builder(this)
                 .setTitle("New bell")
-                .setMessage("Choose a name and time for the new bell.")
+                .setMessage("Choose a name and time (HH:mm) for the new bell.")
                 .setPositiveButton("OK") { _, _ ->
                     timer.timerData.bellTimes.add(BellTime(
                         inputName.text.toString(),

@@ -5,7 +5,10 @@ import androidx.room.*
 import com.ape.meditationretreattimer.model.BellTime
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.model.TimerData
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.*
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 /**
  * The current data model is simple: a Timer has a list of bell times that are stored in
@@ -25,21 +28,38 @@ import java.time.LocalTime
 class Converters {
     @TypeConverter
     fun timerDataFromString(value: String?): TimerData? {
-        // TODO de-stub
-        return TimerData(mutableListOf(
-            BellTime("foo", LocalTime.of(13, 0)),
-            BellTime("bar", LocalTime.of(14, 0)),
-            BellTime("baz", LocalTime.of(14, 30))))
+        if (value == null) {
+            return TimerData(mutableListOf())
+        }
+
+        val bellTimes = Json.parseToJsonElement(value)
+            .jsonObject["bellTimes"]!!
+            .jsonArray.map { obj ->
+                BellTime(
+                    obj.jsonObject["name"]!!.jsonPrimitive.contentOrNull!!,
+                    LocalTime.parse(obj.jsonObject["time"]!!.jsonPrimitive.contentOrNull)
+                )
+            }
+        return TimerData(bellTimes.toMutableList())
     }
 
     @TypeConverter
     fun timerDataToString(timerData: TimerData?): String? {
-        // TODO de-stub
-        return """{"bellTimes":[{"name":"foo","time":123},{"name":"bar","time":456}]}"""
+        val jsonObject = buildJsonObject {
+            putJsonArray("bellTimes") {
+                for (bellTime in timerData!!.bellTimes) {
+                    addJsonObject {
+                        put("name", bellTime.name)
+                        put("time", bellTime.time.format(DateTimeFormatter.ofPattern("HH:mm")))
+                    }
+                }
+            }
+        }
+        return Json.encodeToString(jsonObject)
     }
 }
 
-@Database(entities = [Timer::class], version = 3, exportSchema = false)
+@Database(entities = [Timer::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun timerDao(): TimerDao
