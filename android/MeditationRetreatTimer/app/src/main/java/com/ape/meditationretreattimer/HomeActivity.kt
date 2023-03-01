@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ape.meditationretreattimer.data.AppDatabase
@@ -40,15 +41,16 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
                 .setTitle("New timer")
                 .setMessage("Give the new timer a name")
                 .setPositiveButton("OK") { _, _ ->
-                    timerDao.insert(Timer(input.text.toString(), TimerData(listOf())))
+                    timerDao.insert(Timer(input.text.toString(), TimerData(mutableListOf())))
                     refreshTimers()
                 }
                 .setCancelable(true)
                 .setView(input)
-                .show()
+            builder.show()
         }
 
         setSupportActionBar(binding.toolbar)
+        Log.d("FOO", "!!! onCreate ")
     }
 
     override fun onStartClick(timer: Timer) {
