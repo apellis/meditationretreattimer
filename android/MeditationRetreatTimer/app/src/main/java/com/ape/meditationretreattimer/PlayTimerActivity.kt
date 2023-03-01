@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityPlayTimerBinding
@@ -42,12 +43,19 @@ class PlayTimerActivity : AppCompatActivity() {
         handler.post(object: Runnable {
             @SuppressLint("SetTextI18n")
             override fun run() {
-                // TODO if current time is at completion, change to a completion UI
                 val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-                val currentSegmentPos = segments.indexOfLast { LocalTime.now() >= it.startTime }
-                val segmentStr = segments[currentSegmentPos].name
-                binding.segmentNow.text = "${timeStr}\nNow: ${segmentStr}"
-                (binding.segmentsList.adapter as BellTimeListItemAdapter).setSelectedPos(currentSegmentPos)
+                val newPos: Int
+                val segmentStr: String
+                if (LocalTime.now() >= segments[segments.size - 1].endTime) {
+                    // Session is complete
+                    newPos = RecyclerView.NO_POSITION
+                    segmentStr=  "All done!"
+                } else {
+                    newPos = segments.indexOfLast { LocalTime.now() >= it.startTime }
+                    segmentStr = segments[newPos].name
+                }
+                binding.segmentNow.text = "$timeStr\nNow: $segmentStr"
+                (binding.segmentsList.adapter as BellTimeListItemAdapter).setSelectedPos(newPos)
                 handler.postDelayed(this, Utils.TIME_RESOLUTION_MILLIS)
             }
         })
