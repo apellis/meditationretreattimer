@@ -45,10 +45,14 @@ class BellTimeListItemAdapter(
 
     override fun getItemCount() = segments.size
 
-    fun setSelectedPos(position: Int) {
+    fun setSelectedPos(position: Int, onChangeCallback: (() -> Unit)?) {
         val oldSelectedPos = selectedPos
         selectedPos = position
         notifyItemChanged(oldSelectedPos)
         notifyItemChanged(selectedPos)
+
+        if (selectedPos != oldSelectedPos && onChangeCallback != null) {
+            onChangeCallback()
+        }
     }
 }

@@ -1,10 +1,12 @@
 package com.ape.meditationretreattimer
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.WindowManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.TimerDao
@@ -22,6 +24,11 @@ class PlayTimerActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
 
+    private val mediaPlayer = MediaPlayer().apply {
+        setOnPreparedListener { start() }
+        setOnCompletionListener { reset() }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayTimerBinding.inflate(layoutInflater)
@@ -38,6 +45,9 @@ class PlayTimerActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // Prevent device lock screen from coming on
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         val handler = Handler(Looper.getMainLooper())
         handler.post(object: Runnable {
@@ -62,9 +72,24 @@ class PlayTimerActivity : AppCompatActivity() {
 
                 val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
                 binding.segmentNow.text = "$timeStr\n$segmentStr"
-                (binding.segmentsList.adapter as BellTimeListItemAdapter).setSelectedPos(newPos)
+                (binding.segmentsList.adapter as BellTimeListItemAdapter).setSelectedPos(newPos, ::ringBell)
                 handler.postDelayed(this, Utils.TIME_RESOLUTION_MILLIS)
             }
         })
+    }
+
+    fun ringBell() {
+        // ringBell() only supports one sound at a time. If it is called while a previous call's
+        // sound is playing, the previous sound terminates early and the new sound begins playing.
+        val assetFileDescriptor = this.resources.openRawResourceFd(R.raw.bell)
+        mediaPlayer.run {
+            reset()
+            setDataSource(
+                assetFileDescriptor.fileDescriptor,
+                assetFileDescriptor.startOffset,
+                assetFileDescriptor.declaredLength)
+            prepareAsync()
+        }
+        assetFileDescriptor.close()
     }
 }
