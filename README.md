@@ -21,8 +21,6 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Unnamed bells that don't break up a segment (don't change the displayed "Now" segment upon ringing)
          * More options for bell sounds
          * Automatically set up DND mode, silence everything (notifications, other apps' sounds and vibrations)
-      * QA
-         * Rigorously check for failure modes around device sleep, app deactivation, manual screen lock, etc. -- if in `PlayTimerActivity`, bells should always sound, even when the screen is manually locked
 
 ## Planned
 
