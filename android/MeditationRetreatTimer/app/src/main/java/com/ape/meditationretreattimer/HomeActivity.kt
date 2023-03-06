@@ -2,6 +2,8 @@ package com.ape.meditationretreattimer
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -49,6 +51,20 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setTitle(R.string.timers)
+
+        // TODO add option for "never ask me again" once settings are implemented
+        val notifManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (!notifManager.isNotificationPolicyAccessGranted) {
+            val builder = AlertDialog.Builder(this)
+                .setTitle("[Optional] Allow Do Not Disturb policy access")
+                .setMessage("If you want this app to automatically set and unset Do Not Disturb mode:\n\n1. Choose \"OK\". This will take you to your device's settings.\n2. Select \"Meditation Retreat Timer\" and choose \"Allow\".\n3. Navigate back to this app.")
+                .setPositiveButton("OK") { _, _ ->
+                    startActivity(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                }
+                .setNegativeButton("Cancel") { _, _ -> }
+                .setCancelable(true)
+            builder.show()
+        }
     }
 
     override fun onStartClick(timer: Timer) {

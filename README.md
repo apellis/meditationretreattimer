@@ -13,6 +13,7 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Do proper, not lazy, null safety throughout
          * Input validation for bell times
       * Code quality
+      * Refactor: Use `ViewModel`'s
          * Move DB queries off main thread and remove `.allowMainThreadQueries()` from the database builder in `data.AppDatabase`
          * Add tests
       * Features
@@ -20,8 +21,11 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Unnamed bells that don't break up a segment (don't change the displayed "Now" segment upon ringing)
          * More options for bell sounds
          * Automatically set up DND mode, silence everything (notifications, other apps' sounds and vibrations)
-         * User settings, including 12 vs. 24 hour time
-         * Show current segment and time remaining on lock screen
+         * Auto set and unset airplane mode
+         * User setting: 12 vs. 24 hour time
+         * User setting: Yes/no/never ask again for auto-set DND while playing a timer
+         * User setting: Yes/no/never ask again for auto-set airplane mode while playing a timer
+         * User setting: Show current segment and time remaining on lock screen
 
 ## Planned
 

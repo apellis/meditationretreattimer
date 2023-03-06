@@ -1,6 +1,8 @@
 package com.ape.meditationretreattimer
 
 import android.annotation.SuppressLint
+import android.app.NotificationManager
+import android.content.Context
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -87,6 +89,11 @@ class PlayTimerActivity : AppCompatActivity() {
                 handler.postDelayed(this, Utils.TIME_RESOLUTION_MILLIS)
             }
         })
+
+        val notifManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (notifManager.isNotificationPolicyAccessGranted) {
+            notifManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE)
+        }
     }
 
     override fun onDestroy() {
@@ -94,5 +101,11 @@ class PlayTimerActivity : AppCompatActivity() {
 
         // Timer bells should no longer ring
         handler.removeCallbacksAndMessages(null)
+
+        // Turn off DND
+        val notifManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (notifManager.isNotificationPolicyAccessGranted) {
+            notifManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+        }
     }
 }
