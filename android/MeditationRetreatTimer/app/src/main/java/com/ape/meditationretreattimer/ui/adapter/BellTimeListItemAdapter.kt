@@ -19,6 +19,10 @@ class BellTimeListItemAdapter(
 
     private var selectedPos = RecyclerView.NO_POSITION
 
+    companion object {
+        const val BEFORE_START_POSITION = -2  // != RecyclerView.NO_POSITION = -1
+    }
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val timeTextView: TextView = view.findViewById(R.id.bell_time)
         val nameTextView: TextView = view.findViewById(R.id.bell_time_name)
@@ -52,7 +56,10 @@ class BellTimeListItemAdapter(
         notifyItemChanged(oldSelectedPos)
         notifyItemChanged(selectedPos)
 
-        if (selectedPos != oldSelectedPos && onChangeCallback != null) {
+        if (selectedPos != oldSelectedPos &&
+            oldSelectedPos != RecyclerView.NO_POSITION &&
+            onChangeCallback != null) {
+
             onChangeCallback()
         }
     }

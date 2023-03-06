@@ -9,8 +9,6 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
       * Current build works with improvements planned as described below
       * Not yet on Play Store
    * TODO
-      * Bugfixes
-         * (Can't consistently repro) Sometimes there is a spurious bell immediately upon starting to play a timer _in medias res_
       * Error handling
          * Do proper, not lazy, null safety throughout
          * Input validation for bell times

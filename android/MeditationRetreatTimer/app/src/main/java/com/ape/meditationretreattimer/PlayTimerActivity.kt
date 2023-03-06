@@ -61,13 +61,17 @@ class PlayTimerActivity : AppCompatActivity() {
                 val segmentStr: String
                 val now = LocalTime.now()
 
-                if (segments.isEmpty() || now >= segments[segments.size - 1].startTime) {
-                    // Session is complete
+                if (segments.isEmpty()) {
+                    // Session has no bells
                     newPos = RecyclerView.NO_POSITION
+                    segmentStr = "(Active timer has no bells)"
+                } else if (now >= segments[segments.size - 1].startTime) {
+                    // Session is complete
+                    newPos = segments.size - 1
                     segmentStr = "All done!"
                 } else if (now < segments[0].startTime) {
                     // Session hasn't started yet
-                    newPos = RecyclerView.NO_POSITION
+                    newPos = BellTimeListItemAdapter.BEFORE_START_POSITION
                     segmentStr = "Waiting to start..."
                 } else {
                     newPos = segments.indexOfLast { LocalTime.now() >= it.startTime }
