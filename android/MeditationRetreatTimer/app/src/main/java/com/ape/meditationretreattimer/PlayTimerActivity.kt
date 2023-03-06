@@ -76,25 +76,13 @@ class PlayTimerActivity : AppCompatActivity() {
 
                 val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
                 binding.segmentNow.text = "$timeStr\n$segmentStr"
-                (binding.segmentsList.adapter as BellTimeListItemAdapter).setSelectedPos(newPos, ::ringBell)
+                (binding.segmentsList.adapter as BellTimeListItemAdapter)
+                    .setSelectedPos(newPos) { ->
+                        Utils.playSound(applicationContext, mediaPlayer, R.raw.bell)
+                    }
                 handler.postDelayed(this, Utils.TIME_RESOLUTION_MILLIS)
             }
         })
-    }
-
-    fun ringBell() {
-        // ringBell() only supports one sound at a time. If it is called while a previous call's
-        // sound is playing, the previous sound terminates early and the new sound begins playing.
-        val assetFileDescriptor = this.resources.openRawResourceFd(R.raw.bell)
-        mediaPlayer.run {
-            reset()
-            setDataSource(
-                assetFileDescriptor.fileDescriptor,
-                assetFileDescriptor.startOffset,
-                assetFileDescriptor.declaredLength)
-            prepareAsync()
-        }
-        assetFileDescriptor.close()
     }
 
     override fun onDestroy() {
