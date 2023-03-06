@@ -97,10 +97,10 @@ class PlayTimerActivity : AppCompatActivity() {
         assetFileDescriptor.close()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
 
-        // Remove any pending callbacks that might have old data and play while not in focus
+        // Timer bells should no longer ring
         handler.removeCallbacksAndMessages(null)
     }
 }
