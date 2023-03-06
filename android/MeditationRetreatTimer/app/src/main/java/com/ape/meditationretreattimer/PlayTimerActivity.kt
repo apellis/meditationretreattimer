@@ -48,6 +48,7 @@ class PlayTimerActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = timer.name
 
         // Prevent device lock screen from coming on
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)

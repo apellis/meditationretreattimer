@@ -48,6 +48,7 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
         }
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setTitle(R.string.timers)
     }
 
     override fun onStartClick(timer: Timer) {
