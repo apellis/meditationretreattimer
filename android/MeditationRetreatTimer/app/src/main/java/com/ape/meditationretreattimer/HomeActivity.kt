@@ -63,8 +63,16 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
     }
 
     override fun onDeleteClick(timer: Timer) {
-        timerDao.delete(timer)
-        refreshTimers()
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Confirm timer deletion")
+            .setMessage("Are you sure you want to delete this timer?")
+            .setPositiveButton("Delete") { _, _ ->
+                timerDao.delete(timer)
+                refreshTimers()
+            }
+            .setNegativeButton("Cancel") { _, _, -> }
+            .setCancelable(true)
+        builder.show()
     }
 
     @SuppressLint("NotifyDataSetChanged")
