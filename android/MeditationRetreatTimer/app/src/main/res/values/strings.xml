@@ -4,7 +4,7 @@
     <string name="start_timer">Start timer</string>
     <string name="edit_timer">Edit timer</string>
     <string name="delete_timer">Delete timer</string>
-    <string name="edit_instructions">Enter a list of bell times here. In the Play Timer UI, the gaps between bells will appear as segments. Each segment will be labeled by the name of its starting bell time. The last bell time\'s name will not appear.</string>
+    <string name="edit_instructions">Enter a list of bell times here. When playing a timer, adjacent times will display as a segment whose name is the name attached to the segment\'s start time. The last time will display as a segment with no end, so a name like \"End of day\" works well.</string>
     <string name="add_bell_time_content_des">Add bell time</string>
     <string name="add_new_timer_content_des">Add new timer</string>
 </resources>

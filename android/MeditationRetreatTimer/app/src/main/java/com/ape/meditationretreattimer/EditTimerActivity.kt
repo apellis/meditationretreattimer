@@ -77,7 +77,7 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = timer.name
+        supportActionBar?.title = "Edit timer: ${timer.name}"
     }
 
     override fun onEditClick(bellTime: BellTime) {

@@ -5,16 +5,21 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalTime
 
-data class Segment(val name: String, val startTime: LocalTime, val endTime: LocalTime)
+data class Segment(val name: String, val startTime: LocalTime, val endTime: LocalTime?)
 
 data class BellTime(var name: String, val time: LocalTime)
 
 data class TimerData(val bellTimes: MutableList<BellTime>) {
     val segments: Array<Segment>
         get() {
-            return bellTimes.zipWithNext().map {
+            val segments: MutableList<Segment> =  bellTimes.zipWithNext().map {
                 (fst, snd) -> Segment(fst.name, fst.time, snd.time)
-            }.toTypedArray()
+            }.toMutableList()
+            if (!bellTimes.isEmpty()) {
+                val lastBellTime = bellTimes[bellTimes.size - 1]
+                segments.add(Segment(lastBellTime.name, lastBellTime.time, null))
+            }
+            return segments.toTypedArray()
         }
 }
 

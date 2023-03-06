@@ -34,8 +34,9 @@ class BellTimeListItemAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val segment = segments[position]
+        val endTimeSuffix = if (segment.endTime != null) "–${Utils.formatLocalTime(segment.endTime)}" else ""
         viewHolder.timeTextView.text =
-            "${Utils.formatLocalTime(segment.startTime)}–${Utils.formatLocalTime(segment.endTime)}"
+            "${Utils.formatLocalTime(segment.startTime)}${endTimeSuffix}"
         viewHolder.nameTextView.text = segment.name
         viewHolder.timeTextView.setTypeface(
             null, if (position == selectedPos) Typeface.BOLD else Typeface.NORMAL)

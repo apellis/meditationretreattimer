@@ -61,7 +61,7 @@ class PlayTimerActivity : AppCompatActivity() {
                 val segmentStr: String
                 val now = LocalTime.now()
 
-                if (segments.isEmpty() || now >= segments[segments.size - 1].endTime) {
+                if (segments.isEmpty() || now >= segments[segments.size - 1].startTime) {
                     // Session is complete
                     newPos = RecyclerView.NO_POSITION
                     segmentStr = "All done!"
