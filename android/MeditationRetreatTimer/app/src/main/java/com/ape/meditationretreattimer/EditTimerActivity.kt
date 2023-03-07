@@ -56,7 +56,7 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
                 .setPositiveButton("OK") { _, _ ->
                     timer.timerData.bellTimes.add(BellTime(
                         view.findViewById<EditText>(R.id.add_bell_time_name).text.toString(),
-                        LocalTime.parse("${addBellTimeTime.hour}:${addBellTimeTime.minute}")))
+                        LocalTime.of(addBellTimeTime.hour, addBellTimeTime.minute)))
                     timer.timerData.bellTimes.sortWith { bt1, bt2 ->
                         if (bt1.time >= bt2.time) {
                             1
@@ -80,17 +80,33 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
     }
 
     override fun onEditClick(bellTime: BellTime) {
-        val input = EditText(this)
+        val view = layoutInflater.inflate(R.layout.edit_bell_time_dialog, null)
+        val addBellTimeName = view.findViewById<EditText>(R.id.edit_bell_time_name)
+        val addBellTimeTime = view.findViewById<TimePicker>(R.id.edit_bell_time_time)
+
         val builder = AlertDialog.Builder(this)
             .setTitle("Edit bell")
-            .setMessage("Give the bell a new name")
+            .setView(view)
             .setPositiveButton("OK") { _, _ ->
-                bellTime.name = input.text.toString()
+                bellTime.name = addBellTimeName.text.toString()
+                bellTime.time = LocalTime.of(addBellTimeTime.hour, addBellTimeTime.minute)
+                timer.timerData.bellTimes.sortWith { bt1, bt2 ->
+                    if (bt1.time >= bt2.time) {
+                        1
+                    } else if (bt1.time <= bt2.time) {
+                        -1
+                    } else {
+                        0
+                    }
+                }
                 timerDao.update(timer)
                 refreshBellTimes()
             }
             .setCancelable(true)
-            .setView(input)
+        addBellTimeName.setText(bellTime.name)
+        addBellTimeTime.hour = bellTime.time.hour
+        addBellTimeTime.minute = bellTime.time.minute
+        addBellTimeTime.setIs24HourView(settings[SettingName.USE_24_HOUR_TIME.name] == "true")
         builder.show()
     }
 

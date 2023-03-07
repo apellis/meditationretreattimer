@@ -18,11 +18,10 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Move DB queries off main thread and remove `.allowMainThreadQueries()` from the database builder in `data.AppDatabase`
          * Add tests
       * Features
-         * [P0] Some sort of good UI for editing bell times without having to delete and re-add them
          * [P1] User setting: Show current segment and time remaining on lock screen
-         * [P1] More options for bell sounds
          * [P1] Auto set and unset airplane mode
          * [P1] User setting: Yes/no/never ask again for auto-set airplane mode while playing a timer
+         * [P2] More options for bell sounds
          * [P2] Unnamed bells that don't break up a segment (don't change the displayed "Now" segment upon ringing)
 
 ## Planned

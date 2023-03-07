@@ -7,7 +7,7 @@ import java.time.LocalTime
 
 data class Segment(val name: String, val startTime: LocalTime, val endTime: LocalTime?)
 
-data class BellTime(var name: String, val time: LocalTime)
+data class BellTime(var name: String, var time: LocalTime)
 
 data class TimerData(val bellTimes: MutableList<BellTime>) {
     val segments: Array<Segment>
