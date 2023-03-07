@@ -2,6 +2,7 @@ package com.ape.meditationretreattimer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.CheckBox
 import android.widget.RadioGroup
 import com.ape.meditationretreattimer.data.AppDatabase
@@ -22,6 +23,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(R.string.settings)
 
         db = AppDatabase.getDatabase(applicationContext)

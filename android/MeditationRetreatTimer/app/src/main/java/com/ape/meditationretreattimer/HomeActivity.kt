@@ -7,6 +7,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ape.meditationretreattimer.data.AppDatabase
@@ -65,10 +68,31 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
                 .setCancelable(true)
             builder.show()
         }
+    }
 
-        // TODO remove this; debugging stuff
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_item_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.menu_item_about -> {
+                val builder = AlertDialog.Builder(this)
+                    .setTitle("About")
+                    .setView(R.layout.about_dialog)
+                    .setPositiveButton("OK") { _, _ -> }
+                builder.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onStartClick(timer: Timer) {
