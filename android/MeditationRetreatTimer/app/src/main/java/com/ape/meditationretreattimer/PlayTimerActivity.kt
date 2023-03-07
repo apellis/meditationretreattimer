@@ -12,9 +12,11 @@ import android.view.WindowManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.ape.meditationretreattimer.data.AppDatabase
+import com.ape.meditationretreattimer.data.SettingDao
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityPlayTimerBinding
 import com.ape.meditationretreattimer.model.Segment
+import com.ape.meditationretreattimer.model.SettingName
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.ui.adapter.BellTimeListItemAdapter
 import java.time.LocalTime
@@ -26,6 +28,8 @@ class PlayTimerActivity : AppCompatActivity() {
     private lateinit var segments: MutableList<Segment>
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
+    private lateinit var settingDao: SettingDao
+    private lateinit var settings: Map<String, String>
     private lateinit var handler : Handler
 
     private val mediaPlayer = MediaPlayer().apply {
@@ -40,6 +44,8 @@ class PlayTimerActivity : AppCompatActivity() {
 
         db = AppDatabase.getDatabase(applicationContext)
         timerDao = db.timerDao()
+        settingDao = db.settingDao()
+        settings = settingDao.getAll()
 
         timer = timerDao.getById(intent.extras!!.getInt("timerId"))[0]
         segments = timer.timerData.segments.toMutableList()
@@ -91,7 +97,9 @@ class PlayTimerActivity : AppCompatActivity() {
         })
 
         val notifManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (notifManager.isNotificationPolicyAccessGranted) {
+        if (notifManager.isNotificationPolicyAccessGranted &&
+            (!settings.containsKey(SettingName.AUTO_SET_DND.name) || settings[SettingName.AUTO_SET_DND.name] == "true")) {
+
             notifManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE)
         }
     }

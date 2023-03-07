@@ -114,6 +114,7 @@
             android:text="@string/auto_dnd_check2" />
     </LinearLayout>
 
+    <!-- TODO uncomment this once auto-airplace is implemented
     <Space
         android:id="@+id/space3"
         android:layout_width="wrap_content"
@@ -147,5 +148,6 @@
             android:layout_height="wrap_content"
             android:text="@string/auto_airplane_check2" />
     </LinearLayout>
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
