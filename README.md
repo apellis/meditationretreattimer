@@ -20,7 +20,7 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
       * Features
          * [P0] Some sort of good UI for editing bell times without having to delete and re-add them
          * [P0] User setting: 12 vs. 24 hour time
-         * [P0] User setting: Show current segment and time remaining on lock screen
+         * [P1] User setting: Show current segment and time remaining on lock screen
          * [P1] More options for bell sounds
          * [P1] Auto set and unset airplane mode
          * [P1] User setting: Yes/no/never ask again for auto-set airplane mode while playing a timer

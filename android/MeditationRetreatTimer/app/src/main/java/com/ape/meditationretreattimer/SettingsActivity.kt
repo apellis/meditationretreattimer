@@ -54,11 +54,11 @@ class SettingsActivity : AppCompatActivity() {
         } else {
             binding.hourFormat12.isChecked = true
         }
-        binding.lockScreenCheck.isChecked = settings[SettingName.SHOW_ON_LOCK_SCREEN.name] == "true"
+        // binding.lockScreenCheck.isChecked = settings[SettingName.SHOW_ON_LOCK_SCREEN.name] == "true"
         binding.autoDndCheck.isChecked = settings[SettingName.AUTO_SET_DND.name] == "true"
         binding.autoDndPermCheck.isChecked = settings[SettingName.NEVER_ASK_FOR_DND_PERMISSION.name] == "true"
-        binding.autoAirplaneCheck.isChecked = settings[SettingName.AUTO_SET_AIRPLANE.name] == "true"
-        binding.autoAirplanePermCheck.isChecked = settings[SettingName.NEVER_ASK_FOR_AIRPLANE_PERMISSION.name] == "true"
+        // binding.autoAirplaneCheck.isChecked = settings[SettingName.AUTO_SET_AIRPLANE.name] == "true"
+        // binding.autoAirplanePermCheck.isChecked = settings[SettingName.NEVER_ASK_FOR_AIRPLANE_PERMISSION.name] == "true"
     }
 
     private fun registerListeners() {
@@ -66,21 +66,25 @@ class SettingsActivity : AppCompatActivity() {
             SettingName.USE_24_HOUR_TIME.name,
             binding.timeFormatGroup,
             mapOf(R.id.hour_format_12 to "false", R.id.hour_format_24 to "true"))
+        /*
         registerCheckboxSettingClickListener(
             SettingName.SHOW_ON_LOCK_SCREEN.name,
             binding.lockScreenCheck)
+         */
         registerCheckboxSettingClickListener(
             SettingName.AUTO_SET_DND.name,
             binding.autoDndCheck)
         registerCheckboxSettingClickListener(
             SettingName.NEVER_ASK_FOR_DND_PERMISSION.name,
             binding.autoDndPermCheck)
+        /*
         registerCheckboxSettingClickListener(
             SettingName.AUTO_SET_AIRPLANE.name,
             binding.autoAirplaneCheck)
         registerCheckboxSettingClickListener(
             SettingName.NEVER_ASK_FOR_AIRPLANE_PERMISSION.name,
             binding.autoAirplanePermCheck)
+         */
     }
 
     private fun registerCheckboxSettingClickListener(settingName: String, checkBox: CheckBox) {
