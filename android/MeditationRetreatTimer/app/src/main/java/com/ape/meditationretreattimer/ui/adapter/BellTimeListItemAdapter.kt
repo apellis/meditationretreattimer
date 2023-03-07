@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
 import com.ape.meditationretreattimer.Utils
 import com.ape.meditationretreattimer.model.Segment
+import com.ape.meditationretreattimer.model.SettingName
 
 class BellTimeListItemAdapter(
     private val context: Context,
-    private val segments: List<Segment>)
+    private val segments: List<Segment>,
+    private val settings: Map<String, String>)
     : RecyclerView.Adapter<BellTimeListItemAdapter.ViewHolder>() {
 
     private var selectedPos = RecyclerView.NO_POSITION
@@ -38,9 +40,10 @@ class BellTimeListItemAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val segment = segments[position]
-        val endTimeSuffix = if (segment.endTime != null) "–${Utils.formatLocalTime(segment.endTime)}" else ""
+        val use24Hour = settings[SettingName.USE_24_HOUR_TIME.name] == "true"
+        val endTimeSuffix = if (segment.endTime != null) "–${Utils.formatLocalTime(segment.endTime, use24Hour)}" else ""
         viewHolder.timeTextView.text =
-            "${Utils.formatLocalTime(segment.startTime)}${endTimeSuffix}"
+            "${Utils.formatLocalTime(segment.startTime, use24Hour)}${endTimeSuffix}"
         viewHolder.nameTextView.text = segment.name
         viewHolder.timeTextView.setTypeface(
             null, if (position == selectedPos) Typeface.BOLD else Typeface.NORMAL)

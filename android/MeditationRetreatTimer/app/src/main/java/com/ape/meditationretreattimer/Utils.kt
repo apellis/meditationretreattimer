@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter
 
 class Utils {
     companion object {
-        fun formatLocalTime(lt: LocalTime): String {
-            return lt.format(DateTimeFormatter.ofPattern("HH:mm"))
+        fun formatLocalTime(lt: LocalTime, use24Hour: Boolean): String {
+            return lt.format(DateTimeFormatter.ofPattern(if (use24Hour) "HH:mm" else "hh:mm a"))
         }
 
         const val TIME_RESOLUTION_MILLIS: Long = 100

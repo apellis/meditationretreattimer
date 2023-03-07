@@ -8,10 +8,13 @@ import android.text.InputType
 import android.text.method.TimeKeyListener
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TimePicker
 import com.ape.meditationretreattimer.data.AppDatabase
+import com.ape.meditationretreattimer.data.SettingDao
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityEditTimerBinding
 import com.ape.meditationretreattimer.model.BellTime
+import com.ape.meditationretreattimer.model.SettingName
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.ui.adapter.EditViewBellTimeListItemAdapter
 import com.ape.meditationretreattimer.ui.adapter.OnEditBellTimeItemClickListener
@@ -24,6 +27,8 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
     private lateinit var bellTimes: MutableList<BellTime>
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
+    private lateinit var settingDao: SettingDao
+    private lateinit var settings: Map<String, String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,31 +37,26 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
 
         db = AppDatabase.getDatabase(applicationContext)
         timerDao = db.timerDao()
+        settingDao = db.settingDao()
+        settings = settingDao.getAll()
 
         timer = timerDao.getById(intent.extras!!.getInt("timerId"))[0]
         bellTimes = timer.timerData.bellTimes.toMutableList()
         binding.timerName.text = timer.name
 
-        binding.bellTimesList.adapter = EditViewBellTimeListItemAdapter(this, bellTimes, this)
+        binding.bellTimesList.adapter = EditViewBellTimeListItemAdapter(this, bellTimes, this, settings)
 
         binding.addBellTime.setOnClickListener {
-            val inputs = LinearLayout(applicationContext)
-            inputs.orientation = LinearLayout.VERTICAL
-            val inputName = EditText(this)
-            inputName.hint = "Bell time name"
-            inputs.addView(inputName)
-            val inputTime = EditText(this)
-            inputTime.hint = "Bell time (HH:mm)"
-            inputTime.inputType = InputType.TYPE_DATETIME_VARIATION_TIME
-            inputTime.keyListener = TimeKeyListener(Locale.US)
-            inputs.addView(inputTime)
+            val view = layoutInflater.inflate(R.layout.add_bell_time_dialog, null)
+            val addBellTimeTime = view.findViewById<TimePicker>(R.id.add_bell_time_time)
+
             val builder = AlertDialog.Builder(this)
                 .setTitle("New bell")
-                .setMessage("Choose a name and time (HH:mm) for the new bell.")
+                .setView(view)
                 .setPositiveButton("OK") { _, _ ->
                     timer.timerData.bellTimes.add(BellTime(
-                        inputName.text.toString(),
-                        LocalTime.parse(inputTime.text.toString())))
+                        view.findViewById<EditText>(R.id.add_bell_time_name).text.toString(),
+                        LocalTime.parse("${addBellTimeTime.hour}:${addBellTimeTime.minute}")))
                     timer.timerData.bellTimes.sortWith { bt1, bt2 ->
                         if (bt1.time >= bt2.time) {
                             1
@@ -70,7 +70,7 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
                     refreshBellTimes()
                 }
                 .setCancelable(true)
-                .setView(inputs)
+            addBellTimeTime.setIs24HourView(settings[SettingName.USE_24_HOUR_TIME.name] == "true")
             builder.show()
         }
 

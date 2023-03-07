@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ape.meditationretreattimer.R
 import com.ape.meditationretreattimer.Utils
 import com.ape.meditationretreattimer.model.BellTime
+import com.ape.meditationretreattimer.model.SettingName
 
 class EditViewBellTimeListItemAdapter(
     private val context: Context,
     private val bellTimes: List<BellTime>,
-    private val itemClickListener: OnEditBellTimeItemClickListener)
+    private val itemClickListener: OnEditBellTimeItemClickListener,
+    private val settings: Map<String, String>)
     : RecyclerView.Adapter<EditViewBellTimeListItemAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -44,7 +46,8 @@ class EditViewBellTimeListItemAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val bellTime = bellTimes[position]
-        viewHolder.timeTextView.text = "${Utils.formatLocalTime(bellTime.time)}"
+        val use24Hour = settings[SettingName.USE_24_HOUR_TIME.name] == "true"
+        viewHolder.timeTextView.text = "${Utils.formatLocalTime(bellTime.time, use24Hour)}"
         viewHolder.nameTextView.text = bellTime.name
         viewHolder.bind(bellTimes[position], itemClickListener)
     }

@@ -51,7 +51,7 @@ class PlayTimerActivity : AppCompatActivity() {
         segments = timer.timerData.segments.toMutableList()
         binding.timerName.text = timer.name
 
-        binding.segmentsList.adapter = BellTimeListItemAdapter(this, segments)
+        binding.segmentsList.adapter = BellTimeListItemAdapter(this, segments, settings)
         (binding.segmentsList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
         setSupportActionBar(binding.toolbar)
@@ -86,7 +86,8 @@ class PlayTimerActivity : AppCompatActivity() {
                     segmentStr = "Now: ${segments[newPos].name}"
                 }
 
-                val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+                val timeStr = LocalTime.now().format(DateTimeFormatter.ofPattern(
+                    if (settings[SettingName.USE_24_HOUR_TIME.name] == "true") "HH:mm:ss" else "hh:mm:ss a"))
                 binding.segmentNow.text = "$timeStr\n$segmentStr"
                 (binding.segmentsList.adapter as BellTimeListItemAdapter)
                     .setSelectedPos(newPos) { ->

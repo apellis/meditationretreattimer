@@ -25,4 +25,6 @@
     <string name="about_oss">Open source and for the benefit of all beings.</string>
     <string name="about_github_url">https://github.com/apellis/meditationretreattimer</string>
     <string name="about_copyright">Copyright 2023, Neversink LLC</string>
+    <string name="choose_new_bell_name_and_time">Choose a name and time for the new bell.</string>
+    <string name="bell_time_name">Bell time name</string>
 </resources>
