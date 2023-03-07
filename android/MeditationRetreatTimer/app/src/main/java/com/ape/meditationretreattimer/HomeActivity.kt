@@ -129,7 +129,7 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
                 timerDao.delete(timer)
                 refreshTimers()
             }
-            .setNegativeButton("Cancel") { _, _, -> }
+            .setNegativeButton("Cancel") { _, _ -> }
             .setCancelable(true)
         builder.show()
     }

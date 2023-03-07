@@ -15,7 +15,7 @@ data class TimerData(val bellTimes: MutableList<BellTime>) {
             val segments: MutableList<Segment> =  bellTimes.zipWithNext().map {
                 (fst, snd) -> Segment(fst.name, fst.time, snd.time)
             }.toMutableList()
-            if (!bellTimes.isEmpty()) {
+            if (bellTimes.isNotEmpty()) {
                 val lastBellTime = bellTimes[bellTimes.size - 1]
                 segments.add(Segment(lastBellTime.name, lastBellTime.time, null))
             }

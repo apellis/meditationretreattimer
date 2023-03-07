@@ -47,7 +47,7 @@ class EditViewBellTimeListItemAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val bellTime = bellTimes[position]
         val use24Hour = settings[SettingName.USE_24_HOUR_TIME.name] == "true"
-        viewHolder.timeTextView.text = "${Utils.formatLocalTime(bellTime.time, use24Hour)}"
+        viewHolder.timeTextView.text = Utils.formatLocalTime(bellTime.time, use24Hour)
         viewHolder.nameTextView.text = bellTime.name
         viewHolder.bind(bellTimes[position], itemClickListener)
     }

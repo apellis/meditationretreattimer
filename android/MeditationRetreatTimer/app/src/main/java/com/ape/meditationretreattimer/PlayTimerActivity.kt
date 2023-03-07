@@ -90,7 +90,7 @@ class PlayTimerActivity : AppCompatActivity() {
                     if (settings[SettingName.USE_24_HOUR_TIME.name] == "true") "HH:mm:ss" else "hh:mm:ss a"))
                 binding.segmentNow.text = "$timeStr\n$segmentStr"
                 (binding.segmentsList.adapter as BellTimeListItemAdapter)
-                    .setSelectedPos(newPos) { ->
+                    .setSelectedPos(newPos) {
                         Utils.playSound(applicationContext, mediaPlayer, R.raw.bell)
                     }
                 handler.postDelayed(this, Utils.TIME_RESOLUTION_MILLIS)

@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
-import android.text.method.TimeKeyListener
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TimePicker
 import com.ape.meditationretreattimer.data.AppDatabase
 import com.ape.meditationretreattimer.data.SettingDao

@@ -28,7 +28,7 @@ import java.time.format.DateTimeFormatter
 
 class Converters {
     @TypeConverter
-    fun timerDataFromString(value: String?): TimerData? {
+    fun timerDataFromString(value: String?): TimerData {
         if (value == null) {
             return TimerData(mutableListOf())
         }
@@ -45,7 +45,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun timerDataToString(timerData: TimerData?): String? {
+    fun timerDataToString(timerData: TimerData?): String {
         val jsonObject = buildJsonObject {
             putJsonArray("bellTimes") {
                 for (bellTime in timerData!!.bellTimes) {

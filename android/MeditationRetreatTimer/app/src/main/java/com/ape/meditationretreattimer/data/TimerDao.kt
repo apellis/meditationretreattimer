@@ -4,7 +4,7 @@ import androidx.room.*
 import com.ape.meditationretreattimer.model.Timer
 
 @Dao
-public interface TimerDao {
+interface TimerDao {
     @Query("SELECT * FROM timer ORDER BY id ASC")
     fun getAll(): List<Timer>
 
