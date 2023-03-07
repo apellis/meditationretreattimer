@@ -13,8 +13,10 @@ import android.view.MenuItem
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ape.meditationretreattimer.data.AppDatabase
+import com.ape.meditationretreattimer.data.SettingDao
 import com.ape.meditationretreattimer.data.TimerDao
 import com.ape.meditationretreattimer.databinding.ActivityHomeBinding
+import com.ape.meditationretreattimer.model.SettingName
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.model.TimerData
 import com.ape.meditationretreattimer.ui.adapter.OnTimerListItemClickListener
@@ -24,7 +26,9 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var db: AppDatabase
     private lateinit var timerDao: TimerDao
+    private lateinit var settingDao: SettingDao
     private lateinit var timers: MutableList<Timer>
+    private lateinit var settings: Map<String, String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,8 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
         db = AppDatabase.getDatabase(applicationContext)
         timerDao = db.timerDao()
         timers = timerDao.getAll().toMutableList()
+        settingDao = db.settingDao()
+        settings = settingDao.getAll()
 
         binding.timersList.layoutManager = LinearLayoutManager(this)
         binding.timersList.adapter = TimerListItemAdapter(this, timers, this)
@@ -55,16 +61,24 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setTitle(R.string.timers)
 
-        // TODO add option for "never ask me again" once settings are implemented
         val notifManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (!notifManager.isNotificationPolicyAccessGranted) {
+        if (!notifManager.isNotificationPolicyAccessGranted &&
+            (!settings.containsKey(SettingName.NEVER_ASK_FOR_DND_PERMISSION.name) || settings[SettingName.NEVER_ASK_FOR_DND_PERMISSION.name] == "false")) {
             val builder = AlertDialog.Builder(this)
-                .setTitle("[Optional] Allow Do Not Disturb policy access")
-                .setMessage("If you want this app to automatically set and unset Do Not Disturb mode:\n\n1. Choose \"OK\". This will take you to your device's settings.\n2. Select \"Meditation Retreat Timer\" and choose \"Allow\".\n3. Navigate back to this app.")
-                .setPositiveButton("OK") { _, _ ->
+                .setTitle("Grant permission for automatic Do Not Disturb?")
+                .setMessage("If you want this app to automatically set and unset Do Not Disturb mode:\n\n1. Choose \"Yes\". This will take you to your device's settings.\n2. Select \"Meditation Retreat Timer\" and choose \"Allow\".\n3. Navigate back to this app.")
+                .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                    settingDao.set(SettingName.AUTO_SET_DND.name, "true")
+                    settingDao.set(SettingName.NEVER_ASK_FOR_DND_PERMISSION.name, "false")
+                    settings = settingDao.getAll()
                 }
-                .setNegativeButton("Cancel") { _, _ -> }
+                .setNeutralButton("Don't ask again") { _, _ ->
+                    settingDao.set(SettingName.AUTO_SET_DND.name, "false")
+                    settingDao.set(SettingName.NEVER_ASK_FOR_DND_PERMISSION.name, "true")
+                    settings = settingDao.getAll()
+                }
+                .setNegativeButton("No") { _, _ -> }
                 .setCancelable(true)
             builder.show()
         }

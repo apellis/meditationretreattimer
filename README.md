@@ -26,6 +26,7 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * User setting: Yes/no/never ask again for auto-set DND while playing a timer
          * User setting: Yes/no/never ask again for auto-set airplane mode while playing a timer
          * User setting: Show current segment and time remaining on lock screen
+         * In settings, gray out invalid settings states
 
 ## Planned
 
