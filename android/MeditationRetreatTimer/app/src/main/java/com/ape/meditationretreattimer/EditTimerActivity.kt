@@ -18,7 +18,6 @@ import com.ape.meditationretreattimer.ui.adapter.OnEditBellTimeItemClickListener
 import java.time.LocalTime
 import java.util.*
 
-// TODO: re-order functionality, ideally with tag-and-drag
 class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
     private lateinit var binding: ActivityEditTimerBinding
     private lateinit var timer: Timer

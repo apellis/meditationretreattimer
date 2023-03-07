@@ -18,7 +18,7 @@
     <string name="auto_airplane_check1">Automatically start Airplane mode when playing a timer</string>
     <string name="auto_airplane_check2">Never prompt for Airplane permission</string>
     <string name="play_timer_options">Play Timer options</string>
-    <string name="show_progress_on_lock_screen">Show progress on lock screen</string>
+    <string name="show_progress_on_lock_screen">Show active timer segment on lock screen</string>
     <string name="menu_item_settings">Settings</string>
     <string name="menu_item_about">About</string>
     <string name="about_app_name_and_version">Meditation Retreat Timer, v1.0</string>
