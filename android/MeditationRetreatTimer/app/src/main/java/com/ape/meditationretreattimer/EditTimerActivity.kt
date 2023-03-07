@@ -39,7 +39,6 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
 
         timer = timerDao.getById(intent.extras!!.getInt("timerId"))[0]
         bellTimes = timer.timerData.bellTimes.toMutableList()
-        binding.timerName.text = timer.name
 
         binding.bellTimesList.adapter = EditViewBellTimeListItemAdapter(this, bellTimes, this, settings)
 
@@ -73,7 +72,7 @@ class EditTimerActivity : AppCompatActivity(), OnEditBellTimeItemClickListener {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Edit timer: ${timer.name}"
+        binding.toolbar.contentDescription = "Edit timer: ${timer.name}"
     }
 
     override fun onEditClick(bellTime: BellTime) {

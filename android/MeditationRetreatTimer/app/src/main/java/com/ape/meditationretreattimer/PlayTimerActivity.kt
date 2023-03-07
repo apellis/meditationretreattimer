@@ -49,7 +49,7 @@ class PlayTimerActivity : AppCompatActivity() {
 
         timer = timerDao.getById(intent.extras!!.getInt("timerId"))[0]
         segments = timer.timerData.segments.toMutableList()
-        binding.timerName.text = timer.name
+        binding.toolbar.contentDescription = timer.name
 
         binding.segmentsList.adapter = BellTimeListItemAdapter(this, segments, settings)
         (binding.segmentsList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false

@@ -23,7 +23,7 @@ class SettingsActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(R.string.settings)
+        binding.toolbar.contentDescription = "Settings"
 
         db = AppDatabase.getDatabase(applicationContext)
         settingDao = db.settingDao()

@@ -17,21 +17,11 @@
         app:popupTheme="@style/Theme.MeditationRetreatTimer"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/timer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name of timer" />
-
     <Space
         android:id="@+id/space"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/timer_name"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toStartOf="parent" />
 
     <TextView

@@ -18,6 +18,7 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Move DB queries off main thread and remove `.allowMainThreadQueries()` from the database builder in `data.AppDatabase`
          * Add tests
       * Features
+         * [P1] Edit name of timer
          * [P1] User setting: Show current segment and time remaining on lock screen
          * [P1] Auto set and unset airplane mode
          * [P1] User setting: Yes/no/never ask again for auto-set airplane mode while playing a timer
