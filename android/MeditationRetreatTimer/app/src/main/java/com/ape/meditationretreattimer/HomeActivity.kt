@@ -65,6 +65,10 @@ class HomeActivity : AppCompatActivity(), OnTimerListItemClickListener {
                 .setCancelable(true)
             builder.show()
         }
+
+        // TODO remove this; debugging stuff
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onStartClick(timer: Timer) {

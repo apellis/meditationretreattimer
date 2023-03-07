@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
     <application
         android:name="com.ape.meditationretreattimer.MeditationRetreatTimerApplication"
         android:allowBackup="true"
@@ -13,6 +15,9 @@
         android:theme="@style/Theme.MeditationRetreatTimer"
         tools:targetApi="31">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
@@ -23,14 +28,12 @@
         </activity>
         <activity
             android:name=".EditTimerActivity"
-            android:parentActivityName=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".PlayTimerActivity"
-            android:parentActivityName=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".HomeActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
 </manifest>

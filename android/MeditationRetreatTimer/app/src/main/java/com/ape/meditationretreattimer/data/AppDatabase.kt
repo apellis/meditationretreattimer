@@ -3,6 +3,7 @@ package com.ape.meditationretreattimer.data
 import android.content.Context
 import androidx.room.*
 import com.ape.meditationretreattimer.model.BellTime
+import com.ape.meditationretreattimer.model.Setting
 import com.ape.meditationretreattimer.model.Timer
 import com.ape.meditationretreattimer.model.TimerData
 import kotlinx.serialization.encodeToString
@@ -59,10 +60,11 @@ class Converters {
     }
 }
 
-@Database(entities = [Timer::class], version = 4, exportSchema = false)
+@Database(entities = [Timer::class, Setting::class], version = 5, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun timerDao(): TimerDao
+    abstract fun settingDao(): SettingDao
 
     companion object {
         @Volatile
