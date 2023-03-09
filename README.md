@@ -14,9 +14,10 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
          * Input validation for bell times
          * In settings, gray out invalid settings states
       * Code quality
-         * Refactor: Use `ViewModel`'s
          * Move DB queries off main thread and remove `.allowMainThreadQueries()` from the database builder in `data.AppDatabase`
          * Add tests
+         * [Bigger] Use `LiveData` and `ViewModel`
+         * [Bigger] Migrate to Compose
       * Features
          * [P1] Edit name of timer
          * [P1] User setting: Show current segment and time remaining on lock screen
