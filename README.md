@@ -9,6 +9,8 @@ A timer for meditation retreats. Open source so you can build and run it yoursel
       * Current build works with improvements planned as described below
       * Not yet on Play Store
    * TODO
+         * Bugfixes
+         * DND turns off sounds; add exception for MRT sounds to play anyway
       * Error handling
          * Do proper, not lazy, null safety throughout
          * Input validation for bell times
