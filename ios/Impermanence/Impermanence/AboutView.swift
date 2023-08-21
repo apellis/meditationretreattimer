@@ -9,10 +9,13 @@ import SwiftUI
 
 struct AboutView: View {
     @Binding var isPresentingAboutView: Bool
+    let appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(unknown!)"
 
     var body: some View {
         NavigationStack {
             VStack{
+                Text("Impermance")
+                Text("Version \(appVersion)")
                 Text("For the benefit of all beings ☸️")
                 Divider()
                     .padding()
