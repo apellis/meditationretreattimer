@@ -25,7 +25,7 @@ struct DayCardView: View {
             Spacer()
             HStack {
                 if day.segments.count > 0 {
-                    Label("\(formatter.string(from: day.segmentStartEndTimes[0].0)) – \(formatter.string(from: day.segmentStartEndTimes[day.segmentStartEndTimes.count - 1].0))", systemImage: "clock")
+                    Label("\(formatter.string(from: day.segmentStartEndTimes[0].0)) – \(formatter.string(from: day.segmentStartEndTimes[day.segmentStartEndTimes.count - 1].1))", systemImage: "clock")
                         .accessibilityLabel("duration \(day.segments.count)")
                         .labelStyle(.trailingIcon)
                 }
