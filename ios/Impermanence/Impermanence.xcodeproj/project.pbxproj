@@ -34,9 +34,7 @@
 		FA8992DE2A8D47EF00971377 /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA8992DD2A8D47EF00971377 /* bell.mp3 */; };
 		FA8992DF2A8D47EF00971377 /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA8992DD2A8D47EF00971377 /* bell.mp3 */; };
 		FA8992E42A8D59A600971377 /* NewDaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8992E32A8D59A600971377 /* NewDaySheet.swift */; };
-		FA8992E52A8D59A600971377 /* NewDaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8992E32A8D59A600971377 /* NewDaySheet.swift */; };
 		FA8992E72A8EC25400971377 /* DayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8992E62A8EC25400971377 /* DayStore.swift */; };
-		FA8992E82A8EC25400971377 /* DayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8992E62A8EC25400971377 /* DayStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -366,9 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA8992E82A8EC25400971377 /* DayStore.swift in Sources */,
 				FA89929C2A7EAF5600971377 /* ImpermanenceUITestsLaunchTests.swift in Sources */,
-				FA8992E52A8D59A600971377 /* NewDaySheet.swift in Sources */,
 				FA89929A2A7EAF5600971377 /* ImpermanenceUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
