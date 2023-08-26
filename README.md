@@ -1,6 +1,6 @@
 # Impermanence
 
-A timer for meditation retreats. Open source and freely available on the iOS App Store and Google Play Store. You can support the [author](https://twitter.com/a_p_ellis) by purchasing the app on your device's app store for a nominal fee.
+A timer for meditation retreats. Open source and freely available on the iOS App Store.
 
 ## iOS
 
