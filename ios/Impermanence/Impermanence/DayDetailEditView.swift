@@ -38,6 +38,7 @@ struct DayDetailEditView: View {
                         day.segments.move(fromOffsets: from, toOffset: to)
                     }
                 }
+                .id(UUID())
             }
             Section(header: Text("New Segment")) {
                 VStack {
