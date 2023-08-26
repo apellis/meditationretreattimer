@@ -19,7 +19,6 @@ A timer for meditation retreats. Open source and freely available on the iOS App
 * Customizable bells (sound, number of rings)
 * "Quick sit" feature
 * Manual bell ring from active day UI
-* Bugfix: speed up UI changes when re-ordering segments while editing a day
 
 ## Android
 
