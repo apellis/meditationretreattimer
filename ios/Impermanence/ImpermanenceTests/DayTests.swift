@@ -77,5 +77,5 @@ func dateFromString(_ str: String) -> Date {
     formatter.locale = Locale(identifier: "en_US")
     formatter.timeZone = TimeZone(identifier: "America/Los_Angeles")
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    return formatter.date(from: str)! as Date
+    return formatter.date(from: str)!
 }
