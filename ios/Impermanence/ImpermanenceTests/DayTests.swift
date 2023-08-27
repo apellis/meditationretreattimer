@@ -44,6 +44,7 @@ final class DayTests: XCTestCase {
 
         let times = day.segmentStartEndTimes
 
+        XCTAssertEqual(times.count, 2)
         let (start1, end1) = times[0]
         XCTAssertEqual(start1, dateFromString("2023-08-26 07:00:00"))
         XCTAssertEqual(end1, dateFromString("2023-08-26 07:30:00"))
