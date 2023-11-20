@@ -7,13 +7,15 @@
 
 import SwiftUI
 
+import NavigationStackBackport
+
 struct SettingsView: View {
     @Binding var isPresentingSettingsView: Bool
 
     @State private var use24HourTime: Bool = false
 
     var body: some View {
-        NavigationStack {
+        NavigationStackBackport.NavigationStack {
             Toggle(isOn: $use24HourTime, label: {
                 Text("User 24 hour time")
             })

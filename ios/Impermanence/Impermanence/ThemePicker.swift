@@ -7,17 +7,29 @@
 
 import SwiftUI
 
+import NavigationStackBackport
+
 struct ThemePicker: View {
     @Binding var selection: Theme
 
     var body: some View {
-        Picker("Theme", selection: $selection) {
-            ForEach(Theme.allCases) { theme in
-                ThemeView(theme: theme)
-                    .tag(theme)
+        if #available(iOS 16, *) {
+            Picker("Theme", selection: $selection) {
+                ForEach(Theme.allCases) { theme in
+                    ThemeView(theme: theme)
+                        .tag(theme)
+                }
             }
+            .pickerStyle(.navigationLink)
+        } else {
+            Picker("Theme", selection: $selection) {
+                ForEach(Theme.allCases) { theme in
+                    ThemeView(theme: theme)
+                        .tag(theme)
+                }
+            }
+            .pickerStyle(.automatic)
         }
-        .pickerStyle(.navigationLink)
     }
 }
 

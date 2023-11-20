@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import NavigationStackBackport
+
 struct DaysView: View {
     @Binding var days: [Day]
     @Environment(\.scenePhase) private var scenePhase
@@ -16,7 +18,7 @@ struct DaysView: View {
     let saveAction: ()->Void
 
     var body: some View {
-        NavigationStack {
+        NavigationStackBackport.NavigationStack {
             List {
                 ForEach($days) { $day in
                     NavigationLink(destination: DayDetailView(day: $day)) {

@@ -20,6 +20,10 @@ A timer for meditation retreats. Open source and freely available on the iOS App
 * "Quick sit" feature
 * Manual bell ring from active day UI
 
+### Known bugs
+
+* On iOS 15, segments cannot be reordered or deleted when editing a day
+
 ## Android
 
 ### Status

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import NavigationStackBackport
+
 struct DayDetailView: View {
     @Binding var day: Day
 
@@ -63,7 +65,7 @@ struct DayDetailView: View {
             }
         }
         .sheet(isPresented: $isPresentingEditView) {
-            NavigationStack {
+            NavigationStackBackport.NavigationStack {
                 DayDetailEditView(day: $editingDay)
                     .navigationTitle(day.name)
                     .toolbar {
@@ -86,7 +88,7 @@ struct DayDetailView: View {
 
 struct DayDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        NavigationStackBackport.NavigationStack {
             DayDetailView(day: .constant(Day.fullDay))
         }
     }
