@@ -17,7 +17,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStackBackport.NavigationStack {
             Toggle(isOn: $use24HourTime, label: {
-                Text("User 24 hour time")
+                Text("Use 24 hour time")
             })
             .padding()
             .navigationTitle("Settings")
