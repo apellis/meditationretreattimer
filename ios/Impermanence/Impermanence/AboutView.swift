@@ -16,7 +16,7 @@ struct AboutView: View {
     var body: some View {
         NavigationStackBackport.NavigationStack {
             VStack{
-                Text("Impermance")
+                Text("Impermanence")
                 Text("Version \(appVersion)")
                 Text("For the benefit of all beings ☸️")
                 Divider()
