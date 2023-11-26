@@ -12,13 +12,12 @@ A timer for meditation retreats. Open source and freely available on the iOS App
 ### TODO
 
 * Better editing functionality, e.g. "clone day" or "clone segment"
-* Color theming for segments
 * More accessibility hints
 * Add contextual help in editing UI
-* 12- vs. 24-hour time setting
 * Customizable bells (sound, number of rings)
 * "Quick sit" feature
 * Manual bell ring from active day UI
+* Setting for whether days should loop at midnight or not
 
 ### Known bugs
 
