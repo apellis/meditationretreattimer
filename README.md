@@ -22,7 +22,7 @@ A timer for meditation retreats. Open source and freely available on the iOS App
 
 ### Known bugs
 
-* On iOS 15, segments cannot be reordered or deleted when editing a day
+* On iOS 15, list-reorders do not work (for list of days and for list of segments when editing a day); creating and deleting work fine
 
 ## Android
 
