@@ -17,6 +17,8 @@ struct DayDetailView: View {
     var startTime = Date.now
     var endTime = Date.now
 
+    @AppStorage("use24HourTime") private var use24HourTime = true
+
     @State private var editingDay = Day.emptyDay
     @State private var isPresentingEditView = false
 
@@ -28,7 +30,7 @@ struct DayDetailView: View {
         self.endTime = calendar.startOfDay(for: Date.now)
             .addingTimeInterval(self.day.startEndTimeIntervals.1)
 
-        formatter.dateFormat = "HH:mm"
+        formatter.dateFormat = use24HourTime ? "HH:mm" : "hh:mm a"
     }
 
     var body: some View {

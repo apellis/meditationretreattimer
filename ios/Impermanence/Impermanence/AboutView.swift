@@ -29,7 +29,6 @@ struct AboutView: View {
                 Text("""
                     * More bell sound options
                     * Control over number of bell chimes per transition
-                    * 12- vs. 24-hour clock setting
                     * (your feature request can go here!)
                     """)
                     .padding()

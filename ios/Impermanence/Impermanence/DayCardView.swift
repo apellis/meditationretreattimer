@@ -11,10 +11,12 @@ struct DayCardView: View {
     let day: Day
     let formatter = DateFormatter()
 
+    @AppStorage("use24HourTime") private var use24HourTime = true
+
     init(day: Day) {
         self.day = day
 
-        formatter.dateFormat = "HH:mm"
+        formatter.dateFormat = use24HourTime ? "HH:mm" : "hh:mm a"
     }
 
     var body: some View {

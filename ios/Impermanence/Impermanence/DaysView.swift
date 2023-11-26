@@ -42,14 +42,12 @@ struct DaysView: View {
                         Image(systemName: "info.circle")
                     }
                     .accessibilityLabel("About")
-                    /* planned for v0.2
                     Button(action: {
                         isPresentingSettingsView = true
                     }) {
                         Image(systemName: "gearshape")
                     }
                     .accessibilityLabel("Settings")
-                    */
                     Button(action: {
                         isPresentingNewDayView = true
                     }) {
@@ -61,11 +59,9 @@ struct DaysView: View {
             .sheet(isPresented: $isPresentingNewDayView) {
                 NewDaySheet(days: $days, isPresentingNewDayView: $isPresentingNewDayView)
             }
-            /* planned for v0.2
             .sheet(isPresented: $isPresentingSettingsView) {
                 SettingsView(isPresentingSettingsView: $isPresentingSettingsView)
             }
-            */
             .sheet(isPresented: $isPresentingAboutView) {
                 AboutView(isPresentingAboutView: $isPresentingAboutView)
             }
