@@ -7,29 +7,15 @@
 
 import SwiftUI
 
-import NavigationStackBackport
-
 struct SettingsView: View {
-    @AppStorage("loopDays") private var loopDays = true
-    @AppStorage("use24HourTime") private var use24HourTime = true
-    @AppStorage("preventScreenSleep") private var preventScreenSleep = true
-
     @Binding var isPresentingSettingsView: Bool
 
+    @State private var use24HourTime: Bool = false
+
     var body: some View {
-        NavigationStackBackport.NavigationStack {
-            /*
-            Toggle(isOn: $loopDays, label: {
-                Text("Days loop at midnight")
-            })
-            .padding()
-             */
+        NavigationStack {
             Toggle(isOn: $use24HourTime, label: {
-                Text("Use 24 hour time")
-            })
-            .padding()
-            Toggle(isOn: $preventScreenSleep, label: {
-                Text("Prevent screen from sleeping when a day is running")
+                Text("User 24 hour time")
             })
             .padding()
             .navigationTitle("Settings")

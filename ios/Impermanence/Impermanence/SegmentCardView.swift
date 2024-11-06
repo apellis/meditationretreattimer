@@ -16,8 +16,6 @@ struct SegmentCardView: View {
     let highlighted: Bool
     let formatter = DateFormatter()
 
-    @AppStorage("use24HourTime") private var use24HourTime = true
-
     init(segment: Day.Segment, startTime: Date, endTime: Date, theme: Theme, useTheme: Bool = false, highlighted: Bool = false) {
         self.segment = segment
         self.startTime = startTime
@@ -26,7 +24,7 @@ struct SegmentCardView: View {
         self.useTheme = useTheme
         self.highlighted = highlighted
 
-        formatter.dateFormat = use24HourTime ? "HH:mm" : "hh:mm a"
+        formatter.dateFormat = "HH:mm"
     }
 
     var body: some View {

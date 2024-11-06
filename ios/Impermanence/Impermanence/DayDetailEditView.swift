@@ -13,15 +13,12 @@ struct DayDetailEditView: View {
     @State private var newSegmentHours: Int = 0
     @State private var newSegmentMinutes: Int = 0
 
-    @AppStorage("use24HourTime") private var use24HourTime = true
-
     var body: some View {
         Form {
             Section(header: Text("Day Info")) {
                 TextField("Name", text: $day.name)
                 DatePicker("Start of Day", selection: $day.startTimeAsDate, displayedComponents: .hourAndMinute)
                     .accessibilityValue("\(day.startTimeAsDate)")
-                    .environment(\.locale, Locale(identifier: use24HourTime ? "en_GB": "en_US"))
                 ThemePicker(selection: $day.theme)
             }
             Section(header:

@@ -13,8 +13,6 @@ struct DayActiveView: View {
     @Binding var day: Day
     @StateObject var dayTimer: DayTimer
 
-    @AppStorage("preventScreenSleep") private var preventScreenSleep = true
-
     private var player: AVPlayer { AVPlayer.bellPlayer }
 
     init(day: Binding<Day>) {
@@ -56,9 +54,7 @@ struct DayActiveView: View {
                 player.play()
             }
             dayTimer.startDay()
-            if preventScreenSleep {
-                UIApplication.shared.isIdleTimerDisabled = true
-            }
+            UIApplication.shared.isIdleTimerDisabled = true
         }
         .onDisappear {
             dayTimer.stopDay()

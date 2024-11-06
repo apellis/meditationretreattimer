@@ -7,15 +7,13 @@
 
 import SwiftUI
 
-import NavigationStackBackport
-
 struct NewDaySheet: View {
     @State private var newDay = Day.emptyDay
     @Binding var days: [Day]
     @Binding var isPresentingNewDayView: Bool
 
     var body: some View {
-        NavigationStackBackport.NavigationStack {
+        NavigationStack {
             DayDetailEditView(day: $newDay)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

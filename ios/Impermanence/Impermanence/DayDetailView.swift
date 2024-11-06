@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import NavigationStackBackport
-
 struct DayDetailView: View {
     @Binding var day: Day
 
@@ -16,8 +14,6 @@ struct DayDetailView: View {
     let formatter = DateFormatter()
     var startTime = Date.now
     var endTime = Date.now
-
-    @AppStorage("use24HourTime") private var use24HourTime = true
 
     @State private var editingDay = Day.emptyDay
     @State private var isPresentingEditView = false
@@ -30,7 +26,7 @@ struct DayDetailView: View {
         self.endTime = calendar.startOfDay(for: Date.now)
             .addingTimeInterval(self.day.startEndTimeIntervals.1)
 
-        formatter.dateFormat = use24HourTime ? "HH:mm" : "hh:mm a"
+        formatter.dateFormat = "HH:mm"
     }
 
     var body: some View {
@@ -67,7 +63,7 @@ struct DayDetailView: View {
             }
         }
         .sheet(isPresented: $isPresentingEditView) {
-            NavigationStackBackport.NavigationStack {
+            NavigationStack {
                 DayDetailEditView(day: $editingDay)
                     .navigationTitle(day.name)
                     .toolbar {
@@ -90,7 +86,7 @@ struct DayDetailView: View {
 
 struct DayDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStackBackport.NavigationStack {
+        NavigationStack {
             DayDetailView(day: .constant(Day.fullDay))
         }
     }

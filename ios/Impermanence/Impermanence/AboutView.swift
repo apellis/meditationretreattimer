@@ -7,16 +7,14 @@
 
 import SwiftUI
 
-import NavigationStackBackport
-
 struct AboutView: View {
     @Binding var isPresentingAboutView: Bool
     let appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(unknown!)"
 
     var body: some View {
-        NavigationStackBackport.NavigationStack {
+        NavigationStack {
             VStack{
-                Text("Impermanence")
+                Text("Impermance")
                 Text("Version \(appVersion)")
                 Text("For the benefit of all beings ☸️")
                 Divider()
@@ -29,6 +27,7 @@ struct AboutView: View {
                 Text("""
                     * More bell sound options
                     * Control over number of bell chimes per transition
+                    * 12- vs. 24-hour clock setting
                     * (your feature request can go here!)
                     """)
                     .padding()

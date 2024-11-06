@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import NavigationStackBackport
-
 struct DaysView: View {
     @Binding var days: [Day]
     @Environment(\.scenePhase) private var scenePhase
@@ -18,7 +16,7 @@ struct DaysView: View {
     let saveAction: ()->Void
 
     var body: some View {
-        NavigationStackBackport.NavigationStack {
+        NavigationStack {
             List {
                 ForEach($days) { $day in
                     NavigationLink(destination: DayDetailView(day: $day)) {
@@ -42,12 +40,14 @@ struct DaysView: View {
                         Image(systemName: "info.circle")
                     }
                     .accessibilityLabel("About")
+                    /* planned for v0.2
                     Button(action: {
                         isPresentingSettingsView = true
                     }) {
                         Image(systemName: "gearshape")
                     }
                     .accessibilityLabel("Settings")
+                    */
                     Button(action: {
                         isPresentingNewDayView = true
                     }) {
@@ -59,9 +59,11 @@ struct DaysView: View {
             .sheet(isPresented: $isPresentingNewDayView) {
                 NewDaySheet(days: $days, isPresentingNewDayView: $isPresentingNewDayView)
             }
+            /* planned for v0.2
             .sheet(isPresented: $isPresentingSettingsView) {
                 SettingsView(isPresentingSettingsView: $isPresentingSettingsView)
             }
+            */
             .sheet(isPresented: $isPresentingAboutView) {
                 AboutView(isPresentingAboutView: $isPresentingAboutView)
             }
