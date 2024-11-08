@@ -11,8 +11,8 @@ import Foundation
 final class DayTimer: ObservableObject {
     struct Segment: Identifiable {
         let name: String
-        let startTime: Date
-        let endTime: Date
+        var startTime: Date
+        var endTime: Date
         let endBell: Bell
         var rang: Bool = false
         let id = UUID()
@@ -23,7 +23,7 @@ final class DayTimer: ObservableObject {
     @Published var activeSegmentTimeRemaining: TimeInterval = 0
     @Published var segmentIndex: Int = -1
     private(set) var segments: [DayTimer.Segment] = []
-    let startTime: Date
+    var startTime: Date
     private var freshTimer = true  // suppress bell upon segment change if true
 
     var segmentChangedAction: (() -> Void)?
@@ -59,6 +59,18 @@ final class DayTimer: ObservableObject {
 
     func startDay() {
         timer = Timer.scheduledTimer(withTimeInterval: frequency, repeats: true) { [weak self] timer in
+
+            // TODO add a setting for "days loop" and only do the following if that setting is true
+            if !Calendar.current.isDate(Date.now, equalTo: self?.startTime ?? Date.now, toGranularity: .day) {
+                // We wrapped around a day-end. Update all the dates.
+                self!.startTime = Calendar.current.date(byAdding: .day, value: 1, to: self!.startTime)!
+                for (index, _) in self!.segments.enumerated() {
+                    self!.segments[index].startTime = Calendar.current.date(byAdding: .day, value: 1, to: self!.segments[index].startTime)!
+                    self!.segments[index].endTime = Calendar.current.date(byAdding: .day, value: 1, to: self!.segments[index].endTime)!
+                }
+                self!.freshTimer = true  // skips next bell
+            }
+
             self?.update()
         }
         timer?.tolerance = 0.1
